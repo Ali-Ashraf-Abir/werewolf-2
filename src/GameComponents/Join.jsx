@@ -18,7 +18,7 @@ export default function () {
 
             //accessing the join lobby api to send the player data back to the lobby collection
             
-            fetch(`http://localhost:5000/lobbyJoin/${userName}`,{
+            fetch(`https://project-warewolf-aliashrafabirs-projects.vercel.app/lobbyJoin/${userName}`,{
                 method:'PUT',
                 headers:{'content-type':'application/json'},
                 body: JSON.stringify({lobbyNum}),

@@ -33,7 +33,7 @@ export default function Context({children}) {
 
   useEffect(()=>{
 
-    fetch(`http://localhost:5000/players/${userName}`)
+    fetch(`https://project-warewolf-aliashrafabirs-projects.vercel.app/players/${userName}`)
     .then (res=>res.json())
     .then(data=>console.log(data))
 

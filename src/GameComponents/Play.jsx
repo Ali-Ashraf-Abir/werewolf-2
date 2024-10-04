@@ -9,7 +9,7 @@ export default function Play() {
     const handleLobbyCreate=()=>{
 
         const lobbyName={userName}
-        fetch(`http://localhost:5000/lobby/${userName}`,{
+        fetch(`https://project-warewolf-aliashrafabirs-projects.vercel.app/lobby/${userName}`,{
             method:'POST',
             headers:{'content-type':'application/json'},
             body: JSON.stringify(lobbyName),

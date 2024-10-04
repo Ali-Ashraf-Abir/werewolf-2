@@ -20,7 +20,7 @@ export default function Lobby({ expiryTimestamp }) {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/lobby/${roomName ? roomName : userName}`)
+        fetch(`https://project-warewolf-aliashrafabirs-projects.vercel.app/lobby/${roomName ? roomName : userName}`)
             .then(res => res.json())
             .then(data => setPlayerData(data))
         setAction(null)
@@ -48,7 +48,7 @@ export default function Lobby({ expiryTimestamp }) {
 
 
 
-        fetch(`http://localhost:5000/chat/${roomName ? roomName : userName}`, {
+        fetch(`https://project-warewolf-aliashrafabirs-projects.vercel.app/chat/${roomName ? roomName : userName}`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ message, user }),
