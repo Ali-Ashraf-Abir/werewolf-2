@@ -31,7 +31,7 @@ export default function () {
             setRoomName(lobbyNum)
             localStorage.setItem('roomName',lobbyNum)
             console.log(lobbyNum)
-
+            console.log(userName)
             navigate("../lobby")
          
         }

@@ -67,7 +67,7 @@ export default function Lobby({ expiryTimestamp }) {
 
 
                 <div className="">
-                    <div className="grid grid-cols-6">
+                    <div className="grid grid-col-6">
                         {playerData?.map(player => player.playerName)}
                     </div>
 
