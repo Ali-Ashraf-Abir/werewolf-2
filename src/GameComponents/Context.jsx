@@ -1,4 +1,6 @@
+import { getAuth, onAuthStateChanged } from 'firebase/auth/cordova'
 import React, { createContext, useEffect, useState } from 'react'
+import app from './Firebase.ini'
 
 export const AuthContext=createContext(null)
 
@@ -8,43 +10,35 @@ export default function Context({children}) {
   const [userName,setUserName]=useState('')  
   const [roomName,setRoomName]=useState(null)
   const [action,setAction]=useState(null)
+  const[user,setUser]=useState(null)
 
- //fetching user information from localstorage
+  // monitoring the user for any changes 
 
- useEffect(()=>{
+   useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        // ...
+        setUser(user)
+        console.log(user)
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
 
-  if(!userName){
-    const userInfo=JSON.parse(localStorage.getItem("userInfo"))
-    if(userInfo){
-      setUserName(userInfo.playerName)
-    }
-  }
+   },[])
 
-  if(!roomName){
-    const roomInfo=localStorage.getItem("roomName")
-    if(roomInfo){
-      setRoomName(roomInfo)
-    }
-  }
-
- },[userName])
-
-//fetching all player infor from player collection
-
-  useEffect(()=>{
-
-    fetch(`https://project-warewolf-aliashrafabirs-projects.vercel.app/players/${userName}`)
-    .then (res=>res.json())
-    .then(data=>console.log(data))
-
-
-
-  },[userName])
-    
+  const auth=getAuth(app)  
   const authInfo={
     userName,setUserName,
     setRoomName,roomName,
-    action,setAction
+    action,setAction,
+    auth,
+    user,
+    setUser
 
   }  
 

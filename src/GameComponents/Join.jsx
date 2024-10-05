@@ -6,35 +6,33 @@ import { AuthContext } from './Context'
 export default function () {
 
 
-        const {userName,setRoomName,setAction}=useContext(AuthContext)
-        const navigate= useNavigate()
-        //handling the joining lobby form
-        const handleLobbyForm=(event)=>{
+       const {user}=useContext(AuthContext)
 
-            event.preventDefault()
-
-            const form=event.target
-            const lobbyNum=form.lobbyNum.value
-
-            //accessing the join lobby api to send the player data back to the lobby collection
-            
-            fetch(`https://project-warewolf-aliashrafabirs-projects.vercel.app/lobbyJoin/${userName}`,{
-                method:'PUT',
-                headers:{'content-type':'application/json'},
-                body: JSON.stringify({lobbyNum}),
-            })
-            .then(res=>res.json())
-            .then(data=>{
-                setAction(data)
-            })
-
-            setRoomName(lobbyNum)
-            localStorage.setItem('roomName',lobbyNum)
-            console.log(lobbyNum)
-            console.log(userName)
-            navigate("../lobby")
-         
+       const handleJoin=(event)=>{
+        event.preventDefault()
+        const lobbyName=event.target.lobbyNum.value
+        const playerData={
+            name:user?.displayName,
+            ready: 'no',
+            round: 'lobby',
+            isAttacked: 'no',
+            isProtected: 'no',
+            werewolfVote: 0,
+            vote: 0,
+            votted: 'no',
         }
+
+        fetch(`http://localhost:5000/join/${lobbyName?lobbyName:''}`, {
+            method: "POST",
+            headers: {
+              'content-type': 'Application/JSON'
+            },
+            body: JSON.stringify(playerData)
+          })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
+       }
 
         
 
@@ -42,8 +40,8 @@ export default function () {
   return (
     <div>
 
-        <form onSubmit={handleLobbyForm} className='flex-col justify-center items-center'>
-            <input className='bg-red-500' type='text' name='lobbyNum' placeholder='lobby name'></input>
+        <form onSubmit={handleJoin} className='flex-col justify-center items-center'>
+            <input required className='bg-red-500' type='text' name='lobbyNum' placeholder='lobby name'></input>
             <button >Join</button>
 
         </form>

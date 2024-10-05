@@ -6,6 +6,7 @@ import Login from './GameComponents/Login';
 import Play from './GameComponents/Play';
 import Lobby from './GameComponents/Lobby';
 import Join from './GameComponents/Join';
+import Register from './GameComponents/Register';
 // import Login from './components/Pages/Login';
 // import Play from './components/Pages/Play';
 // import Lobby from './components/Pages/Lobby';
@@ -17,6 +18,7 @@ function App() {
     <Route path='/'  >
       <Route index element={<Home />}/>
       <Route path='login' element={<Login />}/>
+      <Route path='register' element={<Register />}/>
       <Route path='play' >
         <Route index element={<Play></Play>}></Route>
       <Route path='lobby' element={<Lobby />}/>
